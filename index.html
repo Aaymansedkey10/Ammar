@@ -9,86 +9,14 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <style>
-    :root {
-      --gold: #c5a059;
-    }
 
-    body {
-      font-family: 'Tajawal', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    .font-amiri {
-      font-family: 'Amiri', serif;
-    }
-
-    ::selection {
-      background: var(--gold);
-      color: white;
-    }
-
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--gold);
-      border-radius: 10px;
-    }
-
-    .dark audio {
-      filter: invert(0.9) hue-rotate(180deg) brightness(1.1);
-    }
-
-    .part-btn-done {
-      background-color: var(--gold) !important;
-      color: white !important;
-      border-color: var(--gold) !important;
-    }
-
-    .surah-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-3px);
-    }
-
-    .custom-scroll::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .profile-img {
-      transition: all 0.5s ease;
-      filter: grayscale(30%);
-    }
-
-    .profile-img:hover {
-      filter: grayscale(0%);
-      transform: scale(1.05);
-      border-color: var(--gold);
-    }
-
-    .counter-done {
-      background-color: #10b981 !important;
-      cursor: default !important;
-      opacity: 0.8;
-    }
-
-    .prayer-card {
-      transition: all 0.3s ease;
-    }
-
-    .prayer-card:hover {
-      background-color: rgba(197, 160, 89, 0.1);
-      transform: scale(1.02);
-    }
-  </style>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: { extend: { colors: { gold: '#c5a059', darkMain: '#0a0b0d', darkCard: '#16181d' } } }
     }
   </script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-[#fcfcfc] dark:bg-darkMain text-slate-900 dark:text-slate-100 transition-colors duration-500">
@@ -98,7 +26,7 @@
     <div class="container mx-auto flex justify-between items-center px-4 md:px-8">
       <div class="font-amiri text-2xl font-bold text-gold italic">أثرٌ باقٍ</div>
       <button id="theme-toggle"
-        class="p-2.5 rounded-xl bg-slate-100 dark:bg-darkCard border border-slate-200 dark:border-slate-700">
+        class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-darkCard border border-slate-200 dark:border-slate-700">
         <span id="theme-icon">🌙</span>
       </button>
     </div>
@@ -106,23 +34,21 @@
 
   <header class="pt-32 pb-12 text-center px-4">
     <div class="mb-8 relative inline-block">
-      <div class="absolute inset-0 bg-gold rounded-full blur-2xl opacity-20 animate-pulse"></div>
       <img src="assets/Ammar.jpg" alt="عمار"
-        class="profile-img w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white dark:border-slate-800 shadow-2xl object-cover relative z-10 mx-auto ring-4 ring-gold/20">
+        class="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white dark:border-slate-800 shadow-2xl object-cover mx-auto ring-4 ring-gold/20">
     </div>
     <h1 class="font-amiri text-4xl md:text-6xl font-bold text-slate-800 dark:text-white mb-6 leading-tight">"وَاذْكُر
       رَّبَّكَ إِذَا نَسِيتَ"</h1>
-    <p class="text-slate-400 max-w-xl mx-auto italic text-sm md:text-base">صدقة جارية عن <span
-        class="text-gold font-bold">عمار</span>، وذكرٌ لا ينقطع، ونورٌ يمتد بإذن الله.</p>
+    <p class="text-slate-400 max-w-xl mx-auto italic">صدقة جارية عن <span class="text-gold font-bold">عمار</span></p>
   </header>
 
   <main class="container mx-auto px-4 md:px-8 max-w-6xl">
 
     <section class="mb-20">
-      <div class="flex justify-between items-end mb-8">
-        <h2 class="font-amiri text-3xl text-gold font-bold">الباقيات الصالحات</h2>
-        <button onclick="resetCounters()"
-          class="text-xs text-slate-400 hover:text-gold transition-colors underline">إعادة ضبط العدادات</button>
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="font-amiri text-3xl text-gold font-bold italic text-right">الباقيات الصالحات</h2>
+        <button onclick="resetAllCounters()"
+          class="text-xs text-red-600 dark:text-red-400 px-4 py-2 rounded-xl font-bold">تصفير الكل ↺</button>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="counters-grid"></div>
     </section>
@@ -130,223 +56,78 @@
     <section class="mb-20">
       <div
         class="bg-slate-900 dark:bg-white/[0.03] rounded-[3rem] p-8 md:p-16 border border-white/5 shadow-2xl relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
-        <div
-          class="absolute -bottom-20 -right-20 text-white/[0.02] dark:text-white/[0.05] font-bold text-[12rem] select-none pointer-events-none">
-          عمار</div>
+        <h2 class="font-amiri text-4xl text-gold font-bold mb-12 text-center italic">في رحاب الدعاء لعمار</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right" id="ammar-prayers-list"></div>
+      </div>
+    </section>
 
-        <h2 class="font-amiri text-4xl text-gold font-bold mb-4 text-center">في رحاب الدعاء لعمار</h2>
-        <p class="text-center text-slate-400 mb-12 font-amiri italic">"خير ما نُهدي للميت دعوة صادقة في ظهر الغيب"</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6" id="ammar-prayers-list">
+    <section
+      class="bg-slate-900 dark:bg-white/[0.03] text-white rounded-[3rem] p-8 md:p-14 mb-20 shadow-xl border border-white/5">
+      <div class="text-center md:text-right mb-10">
+        <h2 class="font-amiri text-4xl font-bold text-gold mb-2 italic text-center md:text-right">ختمة القرآن الكريم
+        </h2>
+        <p class="text-slate-400 font-medium text-center md:text-right">سجل السور التي قرأتها</p>
+      </div>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 p-4 bg-black/20 rounded-3xl mb-10"
+        id="surahs-buttons-grid"></div>
+      <div class="mt-8 pt-8 border-t border-white/10">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+          <h3 class="text-gold font-bold">السور التي تمت قراءتها:</h3>
+          <button onclick="clearAllSurahs()"
+            class="text-[10px] text-red-400 font-bold uppercase tracking-widest hover:text-red-300">مسح سجل
+            الختمة</button>
         </div>
+        <div id="selected-surahs-names" class="flex flex-wrap gap-2 min-h-[40px]"></div>
       </div>
     </section>
 
     <section class="mb-20">
-      <div class="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
-        <div class="text-right border-r-4 border-gold pr-4">
-          <h2 class="font-amiri text-4xl font-bold tracking-tight">المصحف الشريف</h2>
-          <p class="text-slate-400 text-sm">بصوت نخبة من القراء</p>
-        </div>
-        <select id="reciter-select" onchange="renderAudioList()"
-          class="w-full md:w-72 bg-white dark:bg-darkCard border-2 border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 font-bold outline-none focus:border-gold cursor-pointer transition-all appearance-none shadow-sm"></select>
-      </div>
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[700px] overflow-y-auto py-4 px-2 custom-scroll"
-        id="audio-list"></div>
+        class="bg-white dark:bg-darkCard p-6 md:p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 border-b dark:border-slate-800 pb-8">
+          <div class="text-center md:text-right">
+            <h2 class="font-amiri text-3xl text-gold font-bold italic">أستمع للقرآن الكريم</h2>
+            <p class="text-xs text-slate-400 mt-1">صدقة جارية على روح عمار</p>
+          </div>
+          <div class="w-full md:w-72">
+            <select id="reciter-select" onchange="renderAudioLibrary()"
+              class="w-full md:w-72 p-3 rounded-xl bg-slate-50 dark:bg-black/40 border dark:border-slate-700 text-sm outline-none">
+              <option value="https://server12.mp3quran.net/maher/">ماهر المعيقلي</option>
+              <option value="https://server12.mp3quran.net/maher_m/">ماهر المعيقلي (مجود)</option>
+              <option value="https://server12.mp3quran.net/tblawi/">محمد محمود الطبلاوي</option>
+              <option value="https://server12.mp3quran.net/bari/">محمود علي البنا</option>
+              <option value="https://server12.mp3quran.net/obk/">أبو بكر الشاطري</option>
+              <option value="https://server12.mp3quran.net/shoraimy/">سعود الشريم</option>
+              <option value="https://server12.mp3quran.net/tnjy/">محمد أيوب</option>
+              <option value="https://server12.mp3quran.net/hkm/">مفتاح السلطني</option>
+              <option value="https://server12.mp3quran.net/sayed/">سيد رمضان</option>
+              <option value="https://server12.mp3quran.net/yahya/">يحيى الحليلي</option>
+              <option value="https://server12.mp3quran.net/salah_hashim_m/">صلاح الهاشم (مجود)</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="audio-library-grid"></div>
+      </div>
     </section>
 
-    <section class="bg-gold dark:bg-gold text-darkMain rounded-[3rem] p-8 md:p-14 mb-20 shadow-xl">
-      <div class="text-center md:text-right mb-10">
-        <h2 class="font-amiri text-4xl font-bold mb-2">إتمام الختمة</h2>
-        <p class="text-darkMain/70 font-medium">ساهم معنا بقراءة جزء من القرآن الكريم</p>
-      </div>
-      <div class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-10 gap-3" id="quran-grid"></div>
-      <div class="mt-10 pt-8 border-t border-darkMain/10 flex justify-between items-center text-lg font-bold">
-        <span>إجمالي الأجزاء المقروءة:</span>
-        <span id="parts-count" class="text-6xl font-black italic">0</span>
-      </div>
-    </section>
   </main>
 
-  <footer class="relative py-16 overflow-hidden border-t border-slate-200/50 dark:border-slate-800/50 text-center">
-    <p class="font-amiri text-2xl md:text-3xl mb-6 italic text-slate-800 dark:text-white">﴿ وَمَا تَوْفِيقِي إِلَّا
-      بِاللَّهِ ﴾</p>
-    <div class="max-w-2xl mx-auto mb-8 px-4">
-      <p class="text-lg md:text-xl font-medium text-gold leading-relaxed font-amiri">
-        "اللهم اجعل كل حرفٍ قُرئ، وكل ذِكرٍ رُفع، وكل دعاءٍ استُجيب، في ميزان حسنات عمار، واجعلها له نوراً في قبره
-        وضياءً في آخرته."
+  <footer class="py-16 text-center border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-darkMain">
+    <div class="container mx-auto px-4">
+      <p class="font-amiri text-2xl mb-4 italic text-slate-800 dark:text-white">﴿ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ﴾
       </p>
+      <div class="w-24 h-1 bg-gold/30 mx-auto mb-6 rounded-full"></div>
+      <p class="text-[10px] font-bold tracking-[0.4em] uppercase text-slate-400 italic">Sadaqa Jariya - Ammar - 2026</p>
+      <p class="text-xs text-slate-500 mt-2">لا تنسونا ومن رحلوا من صالح دعائكم</p>
     </div>
-    <p class="text-[10px] font-bold tracking-[0.4em] uppercase text-slate-400">Sadaqa Jariya - For Ammar - 2026</p>
   </footer>
 
   <div id="toast"
-    class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-gold text-white dark:text-darkMain px-8 py-4 rounded-2xl shadow-2xl z-[1000] hidden font-bold text-sm">
+    class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gold text-darkMain px-8 py-4 rounded-2xl shadow-2xl z-[1000] hidden font-bold text-sm transform transition-all">
   </div>
-
-  <script>
-    const surahNames = ["الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"];
-
-    const reciters = [
-      { id: "Alafasy", name: "مشاري العفاسي", server: "https://server8.mp3quran.net/afs/" },
-      { id: "Maher", name: "ماهر المعيقلي", server: "https://server12.mp3quran.net/maher/" },
-      { id: "AbdulBaset", name: "عبد الباسط (مرتل)", server: "https://server7.mp3quran.net/basit/" },
-      { id: "Minshawi", name: "محمد صديق المنشاوي", server: "https://server10.mp3quran.net/minsh/" },
-      { id: "Shuraim", name: "سعود الشريم", server: "https://server7.mp3quran.net/shri/" }
-    ];
-
-    const countersData = [
-      { id: "t1", title: "سبحان الله وبحمده" }, { id: "t2", title: "أستغفر الله العظيم" },
-      { id: "t3", title: "اللهم صلِّ على محمد" }, { id: "t4", title: "لا إله إلا الله" },
-      { id: "t5", title: "لا حول ولا قوة إلا بالله" }, { id: "t6", title: "سبحان الله العظيم" },
-      { id: "t7", title: "حسبي الله ونعم الوكيل" }, { id: "t8", title: "يا حي يا قيوم" }
-    ];
-
-    const ammarPrayers = [
-      "اللهم اغفر لعمار وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد.",
-      "اللهم اجعل قبر عمار روضة من رياض الجنة، ولا تجعله حفرة من حفر النار، وآنسه في وحدته.",
-      "اللهم يمّن كتابه، ويسّر حسابه، وثقّل بالحسنات ميزانه، وثبّت على الصراط أقدامه يا رب العالمين.",
-      "اللهم ابنِ له بيتاً في الجنة، واجعل ملتقانا به في الفردوس الأعلى بلا سابقة عذاب.",
-      "اللهم ارحمه فوق الأرض وتحت الأرض ويوم العرض عليك، اللهم قِهِ عذابك يوم تبعث عبادك.",
-      "اللهم أنزله منزلاً مباركاً، وأنت خير المنزلين، اللهم أنزله منازل الصديقين والشهداء والصالحين.",
-      "اللهم اجعل عن يمينه نوراً، وعن شماله نوراً، ومن أمامه نوراً، ومن فوقه نوراً حتى تبعثه آمناً مطمئناً.",
-      "اللهم إن كان محسناً فزد في حسناته، وإن كان مسيئاً فتجاوز عن سيئاته يا غفور يا رحيم.",
-      "اللهم أبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وأدخله الجنة وأعذه من عذاب القبر ومن عذاب النار.",
-      "اللهم عامله بما أنت أهله، ولا تعامله بما هو أهله، اللهم جازه عن الإحسان إحساناً وعن الإساءة عفواً.",
-      "اللهم شفّع فيه نبينا ومصطفاك، واحشره تحت لوائه، واسقه من يده الشريفة شربة هنيئة لا يظمأ بعدها أبداً.",
-      "اللهم إن عمار في ذمتك وحبل جوارك، فقِهِ فتنة القبر، وعذاب النار، وأنت أهل الوفاء والحق.",
-      "اللهم اجعل المسك ترابه، والحرير فراشه، واجعل قبره فسيحاً مد بصره، واجعل ذكره باقياً في الأرض بالخير.",
-      "اللهم صبّ على قبره من النور ما تملأ به عينه، واجعله يرى مكانه من الجنة ضاحكاً مستبشراً.",
-      "اللهم اجعل عمار من الذين سُعدوا في الجنة، خالدين فيها ما دامت السماوات والأرض.",
-      "اللهم يمّن كتابه، ويسر حسابه، وثقّل بالحسنات ميزانه، وثبت على الصراط أقدامه.",
-      "اللهم ارحم غربته، وارحم شيبته، وارحم وحشته، وآنسه في وحدته، وارحم عمار رحمةً واسعة.",
-      "اللهم بشره بقولك: (يا أيتها النفس المطمئنة ارجعي إلى ربك راضية مرضية فادخلي في عبادي وادخلي جنتي).",
-      "اللهم ثبته عند السؤال، اللهم ثبته عند السؤال، اللهم ثبته عند السؤال.",
-      "اللهم أظله تحت ظل عرشك يوم لا ظل إلا ظلك، اللهم اجعل ذريته وأهله من بعده من الصابرين المأجورين.",
-      "اللهم ارزق عمار بكل حرفٍ من القرآن حلاوة، وبكل كلمةٍ كرامة، وبكل سورةٍ سلامة، وبكل جزءٍ جزاءً.",
-      "اللهم ارحم من كسر قلوبنا رحيله، واجمعنا به في جنات النعيم يارب العالمين."
-    ];
-
-    function renderAudioList() {
-      const list = document.getElementById("audio-list");
-      const selectedId = document.getElementById("reciter-select").value;
-      const reciter = reciters.find(r => r.id === selectedId);
-      list.innerHTML = surahNames.map((name, index) => {
-        const surahId = (index + 1).toString().padStart(3, '0');
-        return `<div class="bg-white dark:bg-darkCard p-6 rounded-3xl border border-slate-100 dark:border-slate-800 surah-card flex flex-col gap-4 transition-all">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gold font-black italic text-xs">#${index + 1}</span>
-                    <h3 class="font-bold text-lg">${name}</h3>
-                  </div>
-                  <audio controls preload="none" class="w-full h-9"><source src="${reciter.server}${surahId}.mp3" type="audio/mpeg"></audio>
-                </div>`;
-      }).join("");
-    }
-
-    window.increment = function (id) {
-      let count = parseInt(localStorage.getItem(id)) || 0;
-      if (count < 33) {
-        count++;
-        localStorage.setItem(id, count);
-        updateCounterUI(id, count);
-        if (count === 33) {
-          confetti({ particleCount: 60, colors: ["#c5a059", "#10b981"], origin: { y: 0.8 } });
-          showToast("أتممت التسبيح (33)، تقبل الله");
-        }
-      }
-    };
-
-    function updateCounterUI(id, count) {
-      const el = document.getElementById(id);
-      const btn = document.getElementById(`btn-${id}`);
-      el.innerText = count;
-      if (count >= 33) {
-        btn.innerText = "تمت";
-        btn.classList.add("counter-done");
-      } else {
-        btn.innerText = "ذكر";
-        btn.classList.remove("counter-done");
-      }
-    }
-
-    window.resetCounters = function () {
-      countersData.forEach(c => {
-        localStorage.setItem(c.id, 0);
-        updateCounterUI(c.id, 0);
-      });
-      showToast("تم إعادة العدادات للصفر");
-    }
-
-    window.togglePart = function (num) {
-      let parts = JSON.parse(localStorage.getItem("ammar_parts") || "[]");
-      const btn = document.getElementById(`part-${num}`);
-      if (parts.includes(num)) {
-        parts = parts.filter(p => p !== num);
-        btn.classList.remove("part-btn-done");
-      } else {
-        parts.push(num);
-        btn.classList.add("part-btn-done");
-        confetti({ particleCount: 15 });
-      }
-      localStorage.setItem("ammar_parts", JSON.stringify(parts));
-      document.getElementById("parts-count").innerText = parts.length;
-    };
-
-    function showToast(msg) {
-      const t = document.getElementById("toast");
-      t.innerText = msg; t.classList.remove('hidden');
-      setTimeout(() => t.classList.add('hidden'), 3000);
-    }
-
-    document.getElementById("theme-toggle").onclick = () => {
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem("ammar_theme", document.documentElement.classList.contains("dark") ? "dark" : "light");
-      document.getElementById("theme-icon").innerText = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
-    };
-
-    window.onload = () => {
-      if (localStorage.getItem("ammar_theme") === "dark") {
-        document.documentElement.classList.add("dark");
-        document.getElementById("theme-icon").innerText = "☀️";
-      }
-
-      const cGrid = document.getElementById("counters-grid");
-      countersData.forEach(c => {
-        const val = parseInt(localStorage.getItem(c.id)) || 0;
-        cGrid.innerHTML += `
-            <div class="bg-white dark:bg-darkCard p-6 rounded-3xl border border-slate-100 dark:border-slate-800 text-center shadow-sm">
-                <div class="text-4xl font-black mb-1" id="${c.id}">${val}</div>
-                <p class="text-gold text-[10px] font-bold uppercase mb-5 opacity-60">${c.title}</p>
-                <button id="btn-${c.id}" onclick="increment('${c.id}')" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-gold text-white dark:text-darkMain font-bold text-xs transition-all">
-                  ${val >= 33 ? 'تمت' : 'ذكر'}
-                </button>
-            </div>`;
-        if (val >= 33) document.getElementById(`btn-${c.id}`).classList.add("counter-done");
-      });
-
-      // بناء قائمة الأدعية الموسعة
-      const pList = document.getElementById("ammar-prayers-list");
-      ammarPrayers.forEach(prayer => {
-        pList.innerHTML += `
-          <div class="p-6 bg-white/5 rounded-2xl border-r-4 border-gold backdrop-blur-sm prayer-card">
-            <p class="text-md text-white/90 leading-relaxed italic font-medium">"${prayer}"</p>
-          </div>`;
-      });
-
-      const qGrid = document.getElementById("quran-grid");
-      const savedParts = JSON.parse(localStorage.getItem("ammar_parts") || "[]");
-      for (let i = 1; i <= 30; i++) {
-        qGrid.innerHTML += `<button onclick="togglePart(${i})" id="part-${i}" class="h-10 rounded-lg border border-darkMain/20 font-bold text-xs transition-all ${savedParts.includes(i) ? 'part-btn-done' : 'bg-white/10'}">${i}</button>`;
-      }
-      document.getElementById("parts-count").innerText = savedParts.length;
-
-      const select = document.getElementById("reciter-select");
-      select.innerHTML = reciters.map(r => `<option value="${r.id}">${r.name}</option>`).join("");
-      renderAudioList();
-    };
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
