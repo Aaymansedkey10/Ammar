@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أثرٌ باقٍ | عمار</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { gold: '#c5a059', darkMain: '#0a0b0d', darkCard: '#16181d' } } }
+    }
+  </script>
+</head>
+
+<body class="bg-[#fcfcfc] dark:bg-darkMain text-slate-900 dark:text-slate-100 transition-colors duration-500">
+
+  <nav
+    class="fixed top-0 w-full z-50 bg-white/80 dark:bg-darkMain/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 p-4">
+    <div class="container mx-auto flex justify-between items-center px-4 md:px-8">
+      <div class="font-amiri text-2xl font-bold text-gold italic">أثرٌ باقٍ</div>
+      <button id="theme-toggle"
+        class="p-2.5 rounded-xl bg-slate-100 dark:bg-darkCard border border-slate-200 dark:border-slate-700">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="pt-32 pb-12 text-center px-4">
+    <div class="mb-8 relative inline-block">
+      <div class="absolute inset-0 bg-gold rounded-full blur-2xl opacity-20 animate-pulse"></div>
+      <img src="assets/Ammar.jpg" alt="عمار"
+        class="profile-img w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white dark:border-slate-800 shadow-2xl object-cover relative z-10 mx-auto ring-4 ring-gold/20">
+    </div>
+
+    <h1 class="font-amiri text-4xl md:text-6xl font-bold text-slate-800 dark:text-white mb-6 leading-tight">
+      "وَاذْكُر رَّبَّكَ إِذَا نَسِيتَ"
+    </h1>
+    <p class="text-slate-400 max-w-xl mx-auto italic text-sm md:text-base">
+      صدقة جارية عن <span class="text-gold font-bold">عمار</span>، وذكرٌ لا ينقطع، ونورٌ يمتد بإذن الله.
+    </p>
+  </header>
+
+  <main class="container mx-auto px-4 md:px-8 max-w-6xl">
+
+    <section class="mb-20">
+      <h2 class="font-amiri text-3xl text-gold font-bold mb-8 text-center md:text-right">الباقيات الصالحات</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="counters-grid"></div>
+    </section>
+
+    <section class="mb-20">
+      <div
+        class="bg-slate-900 dark:bg-white/[0.03] rounded-[3rem] p-10 md:p-16 border border-white/5 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+        <div
+          class="absolute -bottom-10 -right-10 text-white/[0.02] dark:text-white/[0.05] font-bold text-9xl select-none pointer-events-none">
+          عمار</div>
+
+        <h2 class="font-amiri text-4xl text-gold font-bold mb-10 text-center">في رحاب الدعاء لعمار</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="ammar-prayers">
+          <div class="p-6 bg-white/5 rounded-2xl border-r-4 border-gold backdrop-blur-sm">
+            <p class="text-lg md:text-xl text-white/90 leading-relaxed font-medium italic">"اللهم اغفر لعمار وارحمه،
+              وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد."</p>
+          </div>
+          <div class="p-6 bg-white/5 rounded-2xl border-r-4 border-gold backdrop-blur-sm">
+            <p class="text-lg md:text-xl text-white/90 leading-relaxed font-medium italic">"اللهم اجعل قبر عمار روضة من
+              رياض الجنة، ولا تجعله حفرة من حفر النار، وآنسه في وحدته وفي وحشته."</p>
+          </div>
+          <div class="p-6 bg-white/5 rounded-2xl border-r-4 border-gold backdrop-blur-sm">
+            <p class="text-lg md:text-xl text-white/90 leading-relaxed font-medium italic">"اللهم يمّن كتابه، ويسّر
+              حسابه، وثقّل بالحسنات ميزانه، وثبّت على الصراط أقدامه يا رب العالمين."</p>
+          </div>
+          <div class="p-6 bg-white/5 rounded-2xl border-r-4 border-gold backdrop-blur-sm">
+            <p class="text-lg md:text-xl text-white/90 leading-relaxed font-medium italic">"اللهم ابنِ له بيتاً في
+              الجنة، واجعل ملتقانا به في الفردوس الأعلى من الجنة بلا سابقة عذاب ولا مناقشة حساب."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-20">
+      <div class="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
+        <div class="text-right border-r-4 border-gold pr-4">
+          <h2 class="font-amiri text-4xl font-bold tracking-tight">المصحف الشريف</h2>
+          <p class="text-slate-400 text-sm">بصوت نخبة من القراء</p>
+        </div>
+        <select id="reciter-select" onchange="renderAudioList()"
+          class="w-full md:w-72 bg-white dark:bg-darkCard border-2 border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 font-bold outline-none focus:border-gold cursor-pointer transition-all appearance-none shadow-sm">
+        </select>
+      </div>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[700px] overflow-y-auto py-4 px-2 custom-scroll"
+        id="audio-list"></div>
+    </section>
+
+    <section class="bg-gold dark:bg-gold text-darkMain rounded-[3rem] p-8 md:p-14 mb-20 shadow-xl">
+      <div class="text-center md:text-right mb-10">
+        <h2 class="font-amiri text-4xl font-bold mb-2">إتمام الختمة</h2>
+        <p class="text-darkMain/70 font-medium">ساهم معنا بقراءة جزء من القرآن الكريم</p>
+      </div>
+      <div class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-10 gap-3" id="quran-grid"></div>
+      <div class="mt-10 pt-8 border-t border-darkMain/10 flex justify-between items-center">
+        <span class="text-lg font-bold">إجمالي الأجزاء المقروءة:</span>
+        <span id="parts-count" class="text-6xl font-black italic">0</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="relative py-20 overflow-hidden border-t border-slate-200/50 dark:border-slate-800/50">
+    <div class="absolute inset-0 pointer-events-none opacity-5 dark:opacity-10">
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,var(--gold)_0%,transparent_70%)]">
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <div class="mb-6 flex justify-center items-center gap-4">
+        <div class="h-px w-8 md:w-16 bg-gold/30"></div>
+        <span class="text-gold opacity-50 font-amiri text-xl">✨</span>
+        <div class="h-px w-8 md:w-16 bg-gold/30"></div>
+      </div>
+
+      <p class="font-amiri text-2xl md:text-3xl mb-6 text-slate-800 dark:text-white italic">
+        ﴿ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ﴾
+      </p>
+
+      <div class="max-w-2xl mx-auto mb-8">
+        <p class="text-lg md:text-2xl font-medium text-gold leading-relaxed font-amiri">
+          "اللهم اجعل هذا العمل خالصاً لوجهك الكريم، متقبلاً عندك، وصدقةً جاريةً ينفعُ بها عمار في قبره ويُعلي بها
+          درجاته."
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <p class="text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase text-slate-400 dark:text-slate-500">
+          Sadaqa Jariya - For Ammar
+        </p>
+        <p class="text-[10px] font-medium text-slate-400 dark:text-slate-600">
+          جميع الحقوق محفوظة لكل مسلم | ٢٠٢٤
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-gold text-white dark:text-darkMain px-8 py-4 rounded-2xl shadow-2xl z-[1000] hidden font-bold text-sm">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
