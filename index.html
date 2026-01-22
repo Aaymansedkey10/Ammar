@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>أثرٌ باقٍ | عمار</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700;900&display=swap"
     rel="stylesheet">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0b0d'/><path d='M30 50 C 30 30, 70 30, 70 50 C 70 70, 30 70, 30 50 M 50 35 L 50 65' stroke='%23c5a059' stroke-width='8' fill='none' stroke-linecap='round'/><text x='50%' y='65%' text-anchor='middle' fill='%23c5a059' font-family='Amiri' font-size='55' font-weight='bold'>ع</text></svg>">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,114 +20,111 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-[#fcfcfc] dark:bg-darkMain text-slate-900 dark:text-slate-100 transition-colors duration-500">
+<body class="bg-slate-50 dark:bg-darkMain text-slate-900 dark:text-slate-100">
 
   <nav
     class="fixed top-0 w-full z-50 bg-white/80 dark:bg-darkMain/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 p-4">
-    <div class="container mx-auto flex justify-between items-center px-4 md:px-8">
-      <div class="font-amiri text-2xl font-bold text-gold italic">أثرٌ باقٍ</div>
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <div class="font-amiri text-2xl font-bold text-gold">أثرٌ باقٍ</div>
       <button id="theme-toggle"
-        class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-darkCard border border-slate-200 dark:border-slate-700">
-        <span id="theme-icon">🌙</span>
+        class="w-10 h-10 rounded-full bg-slate-100 dark:bg-darkCard flex items-center justify-center border dark:border-slate-700 shadow-sm transition-all hover:scale-110 text-xl">
+        🌙
       </button>
     </div>
   </nav>
 
-  <header class="pt-32 pb-12 text-center px-4">
-    <div class="mb-8 relative inline-block">
-      <img src="assets/Ammar.jpg" alt="عمار"
-        class="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white dark:border-slate-800 shadow-2xl object-cover mx-auto ring-4 ring-gold/20">
+  <header class="pt-32 pb-8 text-center px-4">
+    <div class="relative inline-block mb-4">
+      <img src="assets/Ammar.jpg"
+        class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-gold mx-auto object-cover shadow-2xl">
     </div>
-    <h1 class="font-amiri text-4xl md:text-6xl font-bold text-slate-800 dark:text-white mb-6 leading-tight">"وَاذْكُر
-      رَّبَّكَ إِذَا نَسِيتَ"</h1>
-    <p class="text-slate-400 max-w-xl mx-auto italic">صدقة جارية عن <span class="text-gold font-bold">عمار</span></p>
+    <h1 class="font-amiri text-4xl md:text-5xl font-bold mb-2 italic">"وَاذْكُر رَّبَّكَ إِذَا نَسِيتَ"</h1>
+    <p class="text-slate-500 italic">صدقة جارية عن روح الفقيد <span class="text-gold font-bold">عمار</span></p>
   </header>
 
   <main class="container mx-auto px-4 md:px-8 max-w-6xl">
 
-    <section class="mb-20">
-      <div class="flex justify-between items-center mb-8">
-        <h2 class="font-amiri text-3xl text-gold font-bold italic text-right">الباقيات الصالحات</h2>
-        <button onclick="resetAllCounters()"
-          class="text-xs text-red-600 dark:text-red-400 px-4 py-2 rounded-xl font-bold">تصفير الكل ↺</button>
+    <section class="mb-16">
+      <div class="mb-8 border-r-4 border-gold pr-4">
+        <h2 class="font-amiri text-3xl text-gold font-bold">المسبحة الإلكترونية</h2>
+        <p class="text-xs text-slate-400">15 ذكراً متنوعاً - تنبيهات تلقائية عند 33</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="counters-grid"></div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="counters-container"></div>
     </section>
 
-    <section class="mb-20">
-      <div
-        class="bg-slate-900 dark:bg-white/[0.03] rounded-[3rem] p-8 md:p-16 border border-white/5 shadow-2xl relative overflow-hidden">
-        <h2 class="font-amiri text-4xl text-gold font-bold mb-12 text-center italic">في رحاب الدعاء لعمار</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right" id="ammar-prayers-list"></div>
-      </div>
-    </section>
-
-    <section
-      class="bg-slate-900 dark:bg-white/[0.03] text-white rounded-[3rem] p-8 md:p-14 mb-20 shadow-xl border border-white/5">
-      <div class="text-center md:text-right mb-10">
-        <h2 class="font-amiri text-4xl font-bold text-gold mb-2 italic text-center md:text-right">ختمة القرآن الكريم
-        </h2>
-        <p class="text-slate-400 font-medium text-center md:text-right">سجل السور التي قرأتها</p>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 p-4 bg-black/20 rounded-3xl mb-10"
-        id="surahs-buttons-grid"></div>
-      <div class="mt-8 pt-8 border-t border-white/10">
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-          <h3 class="text-gold font-bold">السور التي تمت قراءتها:</h3>
-          <button onclick="clearAllSurahs()"
-            class="text-[10px] text-red-400 font-bold uppercase tracking-widest hover:text-red-300">مسح سجل
-            الختمة</button>
-        </div>
-        <div id="selected-surahs-names" class="flex flex-wrap gap-2 min-h-[40px]"></div>
-      </div>
-    </section>
-
-    <section class="mb-20">
-      <div
-        class="bg-white dark:bg-darkCard p-6 md:p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl">
-        <div
-          class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 border-b dark:border-slate-800 pb-8">
-          <div class="text-center md:text-right">
-            <h2 class="font-amiri text-3xl text-gold font-bold italic">أستمع للقرآن الكريم</h2>
-            <p class="text-xs text-slate-400 mt-1">صدقة جارية على روح عمار</p>
-          </div>
-          <div class="w-full md:w-72">
-            <select id="reciter-select" onchange="renderAudioLibrary()"
-              class="w-full md:w-72 p-3 rounded-xl bg-slate-50 dark:bg-black/40 border dark:border-slate-700 text-sm outline-none">
-              <option value="https://server12.mp3quran.net/maher/">ماهر المعيقلي</option>
-              <option value="https://server12.mp3quran.net/maher_m/">ماهر المعيقلي (مجود)</option>
-              <option value="https://server12.mp3quran.net/tblawi/">محمد محمود الطبلاوي</option>
-              <option value="https://server12.mp3quran.net/bari/">محمود علي البنا</option>
-              <option value="https://server12.mp3quran.net/obk/">أبو بكر الشاطري</option>
-              <option value="https://server12.mp3quran.net/shoraimy/">سعود الشريم</option>
-              <option value="https://server12.mp3quran.net/tnjy/">محمد أيوب</option>
-              <option value="https://server12.mp3quran.net/hkm/">مفتاح السلطني</option>
-              <option value="https://server12.mp3quran.net/sayed/">سيد رمضان</option>
-              <option value="https://server12.mp3quran.net/yahya/">يحيى الحليلي</option>
-              <option value="https://server12.mp3quran.net/salah_hashim_m/">صلاح الهاشم (مجود)</option>
-            </select>
+    <section class="mb-16">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 border-r-4 border-gold pr-4">
+        <h2 class="font-amiri text-3xl text-gold font-bold">استماع للقرآن الكريم</h2>
+        <div class="relative w-full md:w-72">
+          <button onclick="toggleDrop()"
+            class="w-full bg-white dark:bg-darkCard p-4 rounded-2xl border dark:border-slate-800 flex justify-between items-center shadow-sm">
+            <span id="active-reciter" class="font-bold text-sm text-gold truncate">جاري التحميل...</span>
+            <span class="text-gold text-xs">▼</span>
+          </button>
+          <div id="drop-menu"
+            class="absolute hidden w-full mt-2 bg-white dark:bg-darkCard border dark:border-slate-800 rounded-2xl shadow-2xl z-50">
+            <input type="text" id="q-search" oninput="searchR()" placeholder="ابحث عن قارئ..."
+              class="w-full p-4 text-sm bg-slate-50 dark:bg-black/20 outline-none border-b dark:border-white/5 rounded-t-2xl">
+            <div id="r-list" class="max-h-60 overflow-y-auto custom-scrollbar"></div>
           </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="audio-library-grid"></div>
       </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="audio-grid"></div>
+    </section>
+
+    <section class="mb-16">
+      <div class="bg-white dark:bg-darkCard rounded-[2.5rem] p-6 md:p-10 border dark:border-gold/10 shadow-xl">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="text-gold font-bold font-amiri text-2xl italic">سجل الختمة</h3>
+          <button onclick="resetKhatma()"
+            class="text-[10px] text-red-500 font-bold border border-red-500/20 px-3 py-1 rounded-lg hover:bg-red-50 transition-all">تصفير
+            ↺</button>
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-10 gap-2" id="khatma-btns"></div>
+        <div id="khatma-names"
+          class="flex flex-wrap gap-2 mt-8 min-h-[50px] p-4 bg-slate-50 dark:bg-black/40 rounded-2xl border border-dashed border-gold/20">
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-32">
+      <div class="mb-10 text-center border-b border-gold/10 pb-6">
+        <h2 class="font-amiri text-4xl text-gold font-bold mb-4">أدعية مهداة لعمار</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="prayers-grid"></div>
     </section>
 
   </main>
 
-  <footer class="py-16 text-center border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-darkMain">
+  <footer class="bg-white dark:bg-darkCard border-t dark:border-white/5 py-12 text-center text-slate-400">
     <div class="container mx-auto px-4">
-      <p class="font-amiri text-2xl mb-4 italic text-slate-800 dark:text-white">﴿ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ﴾
-      </p>
-      <div class="w-24 h-1 bg-gold/30 mx-auto mb-6 rounded-full"></div>
-      <p class="text-[10px] font-bold tracking-[0.4em] uppercase text-slate-400 italic">Sadaqa Jariya - Ammar - 2026</p>
-      <p class="text-xs text-slate-500 mt-2">لا تنسونا ومن رحلوا من صالح دعائكم</p>
+      <p class="font-amiri text-2xl text-gold mb-4 italic">﴿ إِنَّ هَذَا كَانَ لَكُمْ جَزَاءً وَكَانَ سَعْيُكُمْ
+        مَشْكُورًا ﴾</p>
+      <p class="text-[10px] tracking-widest uppercase font-bold">صدقة جارية عن روح عمار &bull; 2026</p>
     </div>
   </footer>
 
-  <div id="toast"
-    class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gold text-darkMain px-8 py-4 rounded-2xl shadow-2xl z-[1000] hidden font-bold text-sm transform transition-all">
+  <div id="read-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-2 bg-black/90 backdrop-blur-md">
+    <div
+      class="mushaf-modal w-full max-w-5xl rounded-3xl overflow-hidden flex flex-col animate-modal shadow-2xl h-[90vh]">
+      <div
+        class="p-4 md:p-5 flex justify-between items-center border-b border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/5">
+        <div class="flex items-center gap-2">
+          <button id="prev-btn" onclick="navSurah(-1)"
+            class="w-12 h-9 bg-gold/10 hover:bg-gold text-gold hover:text-white rounded-lg transition-all text-xs font-bold">السابق</button>
+          <span id="m-title" class="font-amiri text-xl md:text-2xl font-bold mx-2"></span>
+          <button id="next-btn" onclick="navSurah(1)"
+            class="w-12 h-9 bg-gold/10 hover:bg-gold text-gold hover:text-white rounded-lg transition-all text-xs font-bold">التالي</button>
+        </div>
+        <button onclick="closeRead()"
+          class="w-10 h-10 bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white rounded-full transition-all">✕</button>
+      </div>
+      <div
+        class="quran-scroll-area custom-scrollbar font-amiri text-3xl md:text-4xl text-center p-8 md:p-16 quran-content"
+        id="m-content"></div>
+    </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script src="script.js"></script>
 </body>
 

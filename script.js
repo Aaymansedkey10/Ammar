@@ -1,4 +1,4 @@
-const surahNames = [
+const surahs = [
   "الفاتحة",
   "البقرة",
   "آل عمران",
@@ -114,205 +114,265 @@ const surahNames = [
   "الفلق",
   "الناس",
 ];
-
-const countersData = [
-  { id: "c1", title: "سبحان الله وبحمده" },
-  { id: "c2", title: "أستغفر الله العظيم" },
-  { id: "c3", title: "اللهم صلِّ على محمد" },
-  { id: "c4", title: "لا إله إلا الله" },
-  { id: "c5", title: "لا حول ولا قوة إلا بالله" },
-  { id: "c6", title: "سبحان الله العظيم" },
-  { id: "c7", title: "حسبي الله ونعم الوكيل" },
-  { id: "c8", title: "سبحان الله والحمد لله" },
-  { id: "c9", title: "يا حي يا قيوم برحمتك أستغيث" },
-  { id: "c10", title: "لا إله إلا أنت سبحانك إني كنت من الظالمين" },
-  { id: "c11", title: "اللهم إنك عفو كريم تحب العفو فاعف عنا" },
-  { id: "c12", title: "اللهم اغفر لعمار" },
+const counters = [
+  { id: "z1", text: "سبحان الله" },
+  { id: "z2", text: "الحمد لله" },
+  { id: "z3", text: "لا إله إلا الله" },
+  { id: "z4", text: "الله أكبر" },
+  { id: "z5", text: "أستغفر الله" },
+  { id: "z6", text: "لاحول ولا قوة إلا بالله" },
+  { id: "z7", text: "اللهم صلِّ على محمد" },
+  { id: "z8", text: "سبحان الله وبحمده" },
+  { id: "z9", text: "سبحان الله العظيم" },
+  { id: "z10", text: "حسبي الله ونعم الوكيل" },
+  { id: "z11", text: "يا حي يا قيوم" },
+  { id: "z12", text: "اللهم اغفر لعمار" },
+  { id: "z13", text: "رضيت بالله رباً" },
+  { id: "z14", text: "استغفر الله وأتوب إليه" },
+  { id: "z15", text: "اللهم إنك عفو كريم" },
+];
+const rewards = [
+  "تقبل الله منك",
+  "نور الله قلبك",
+  "اللهم ارحم عمار",
+  "كتب الله لك الأجر",
+  "أجزل الله لك الثواب",
+];
+const prayers = [
+  "اللهم اغفر لعمار وارحمه واعف عنه وأكرم نزله.",
+  "اللهم اجعل قبره روضة من رياض الجنة.",
+  "اللهم يمّن كتابه ويسّر حسابه وثقّل بالحسنات ميزانه.",
+  "اللهم انقله من ضيق اللحود إلى جنات الخلود.",
+  "اللهم ارحم من كسر قلوبنا رحيله واجمعنا به في الفردوس الأعلى.",
+  "اللهم اجعل عمله هذا أنيساً له في وحشته.",
+  "اللهم ارزقه لذة النظر إلى وجهك الكريم.",
+  "اللهم بيّض وجهه يوم تبيّض وجوه.",
+  "اللهم اسقه من حوض نبيك محمد شربة لا يظمأ بعدها.",
+  "اللهم ارفع درجاته في المهديين.",
+  "اللهم انظر إليه نظرة رضا.",
+  "اللهم قهِ فتنة القبر وعذاب النار.",
+  "اللهم ارحمه فوق الأرض وتحت الأرض.",
+  "اللهم أبدله داراً خيراً من داره.",
+  "اللهم أعذه من عذاب القبر.",
+  "اللهم ثبته عند السؤال.",
+  "اللهم اكتبه عندك من الصالحين.",
+  "اللهم أنزله منزلاً مباركاً.",
+  "اللهم عامله بما أنت أهله.",
+  "اللهم ارزق عمار الجنة بغير حساب.",
 ];
 
-const ammarPrayers = [
-  "اللهم اغفر لعمار وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله.",
-  "اللهم اجعل قبره روضة من رياض الجنة، ولا تجعله حفرة من حفر النار.",
-  "اللهم يمّن كتابه، ويسّر حسابه، وثقّل بالحسنات ميزانه، وثبّت على الصراط أقدامه.",
-  "اللهم ابنِ له بيتاً في الجنة، واجعل ملتقانا به في الفردوس الأعلى.",
-  "اللهم ارزقه بكل حرفٍ من القرآن حلاوة، وبكل كلمةٍ كرامة، وبكل سورةٍ سلامة.",
-  "اللهم ارحم من كسر قلوبنا رحيله، واجمعنا به في جنات النعيم.",
-  "اللهم اغسله بالماء والثلج والبرد، ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس.",
-  "اللهم انقله من ضيق اللحود ومراتع الدود إلى جناتك جنات الخلود.",
-  "اللهم بشره بقولك (كلوا واشربوا هنيئاً بما أسلفتم في الأيام الخالية).",
-  "اللهم ارزقه لذة النظر إلى وجهك الكريم والشوق إلى لقائك.",
-  "اللهم اجعل ذريته وأهله صبراً واحتساباً، واجمعهم به في مستقر رحمتك.",
-  "اللهم ارحم غربته، وارحم شيبته (أو شبابه)، واجعله ممن يقال لهم ادخلوها بسلام آمنين.",
-];
+let currentOpenSurahIndex = 0;
+let reciters = [];
 
-function showToast(msg) {
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-start",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    background: document.documentElement.classList.contains("dark")
-      ? "#16181d"
-      : "#ffffff",
-    color: document.documentElement.classList.contains("dark")
-      ? "#ffffff"
-      : "#000000",
-  });
-
-  Toast.fire({
-    icon: "success",
-    title: msg,
-  });
+async function init() {
+  try {
+    const res = await fetch("https://mp3quran.net/api/v3/reciters?language=ar");
+    const data = await res.json();
+    reciters = data.reciters
+      .map((r) => ({
+        name: r.name,
+        srv: r.moshaf[0].server,
+        list: r.moshaf[0].surah_list.split(","),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    renderR(reciters);
+    setReciter(
+      reciters.find((r) => r.name.includes("ماهر المعيقلي")) || reciters[0],
+    );
+  } catch (e) {}
 }
 
-function increment(id, title) {
-  let count = (parseInt(localStorage.getItem(id)) || 0) + 1;
-  localStorage.setItem(id, count);
-  document.getElementById(id).innerText = count;
-  if (count % 33 === 0)
-    showToast(`تقبل الله.. أتممت ${count} مرة من "${title}"`);
-}
-
-function resetCounter(id) {
-  localStorage.setItem(id, 0);
-  document.getElementById(id).innerText = 0;
-}
-
-function resetAllCounters() {
-  Swal.fire({
-    title: "هل أنت متأكد؟",
-    text: "سيتم تصفير جميع عدادات الأذكار!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#c5a059",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "نعم، صفر الكل",
-    cancelButtonText: "إلغاء",
-    background: document.documentElement.classList.contains("dark")
-      ? "#16181d"
-      : "#ffffff",
-    color: document.documentElement.classList.contains("dark")
-      ? "#ffffff"
-      : "#000000",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      countersData.forEach((c) => resetCounter(c.id));
-      Swal.fire({
-        title: "تم!",
-        text: "تم تصفير جميع العدادات بنجاح.",
-        icon: "success",
-        confirmButtonColor: "#c5a059",
-      });
-    }
-  });
-}
-
-function renderAudioLibrary() {
-  const reciter = document.getElementById("reciter-select").value;
-  const grid = document.getElementById("audio-library-grid");
-  grid.innerHTML = surahNames
-    .map((name, i) => {
-      const num = String(i + 1).padStart(3, "0");
-      return `<div class="animate-card bg-slate-50 dark:bg-black/20 p-5 rounded-3xl border border-transparent hover:border-gold/30 transition-all group">
-                <div class="flex justify-between items-center"><span class="text-[10px] font-bold text-slate-400 bg-white dark:bg-darkCard w-7 h-7 flex items-center justify-center rounded-full shadow-sm">${i + 1}</span>
-                <h3 class="font-bold text-sm text-slate-700 dark:text-slate-300 group-hover:text-gold">${name}</h3></div>
-                <audio controls preload="none"><source src="${reciter}${num}.mp3" type="audio/mpeg"></audio></div>`;
-    })
-    .join("");
-}
-
-function toggleSurah(index) {
-  let read = JSON.parse(localStorage.getItem("ammar_read_surahs") || "[]");
-  const btn = document.getElementById(`surah-btn-${index}`);
-  if (read.includes(index)) {
-    read = read.filter((i) => i !== index);
-    if (btn) btn.classList.remove("surah-btn-done");
-  } else {
-    read.push(index);
-    if (btn) btn.classList.add("surah-btn-done");
-  }
-  localStorage.setItem("ammar_read_surahs", JSON.stringify(read));
-  updateSelectedSurahsUI();
-}
-
-function updateSelectedSurahsUI() {
-  const read = JSON.parse(localStorage.getItem("ammar_read_surahs") || "[]");
-  const container = document.getElementById("selected-surahs-names");
-  if (read.length === 0) {
-    container.innerHTML = `<p class="text-slate-500 text-xs italic">لم تسجل أي سورة بعد..</p>`;
-    return;
-  }
-  read.sort((a, b) => a - b);
-  container.innerHTML = read
+function renderR(list) {
+  document.getElementById("r-list").innerHTML = list
     .map(
-      (i) => `
-        <span class="bg-gold/20 text-gold border border-gold/30 px-3 py-1 rounded-full font-bold text-[10px] flex items-center gap-2 animate-card">
-          ${surahNames[i]}
-          <button onclick="toggleSurah(${i})" class="hover:text-red-400 transition-colors bg-gold/40 rounded-full w-4 h-4 flex items-center justify-center text-[12px] leading-none">×</button>
-        </span>`,
+      (r) => `
+                <div onclick='setReciter(${JSON.stringify(r).replace(/'/g, "&apos;")})' class="p-4 hover:bg-gold/10 cursor-pointer border-b dark:border-white/5 text-sm">${r.name}</div>
+            `,
     )
     .join("");
 }
 
-function clearAllSurahs() {
-  Swal.fire({
-    title: "مسح سجل الختمة؟",
-    text: "لا يمكنك التراجع عن هذا الإجراء!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#c5a059",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "نعم، امسح السجل",
-    cancelButtonText: "إلغاء",
-    background: document.documentElement.classList.contains("dark")
-      ? "#16181d"
-      : "#ffffff",
-    color: document.documentElement.classList.contains("dark")
-      ? "#ffffff"
-      : "#000000",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      localStorage.setItem("ammar_read_surahs", "[]");
-      location.reload();
-    }
-  });
+function setReciter(r) {
+  document.getElementById("active-reciter").innerText = r.name;
+  document.getElementById("audio-grid").innerHTML = r.list
+    .map((s) => {
+      const i = parseInt(s) - 1;
+      return `
+                <div class="audio-card bg-white dark:bg-darkCard p-5 rounded-3xl shadow-sm border dark:border-slate-800">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-sm">${surahs[i]}</h4>
+                        <button onclick="openRead(${i})" class="text-[10px] text-gold border border-gold/20 px-3 py-1 rounded-full hover:bg-gold hover:text-white transition-all">قراءة 📖</button>
+                    </div>
+                    <audio controls preload="none"><source src="${r.srv}${String(s).padStart(3, "0")}.mp3"></audio>
+                </div>`;
+    })
+    .join("");
+  document.getElementById("drop-menu").classList.add("hidden");
+}
+
+function addCount(id) {
+  let n = (parseInt(localStorage.getItem(id)) || 0) + 1;
+  localStorage.setItem(id, n);
+  document.getElementById("num-" + id).innerText = n;
+  if (n % 33 === 0) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+      background: document.documentElement.classList.contains("dark")
+        ? "#16181d"
+        : "#fdf5e6",
+      color: "#c5a059",
+    });
+    Toast.fire({
+      icon: "success",
+      title: rewards[Math.floor(Math.random() * rewards.length)],
+    });
+  }
+}
+
+async function openRead(i) {
+  currentOpenSurahIndex = i;
+  const m = document.getElementById("read-modal");
+  m.style.display = "flex";
+  document.body.style.overflow = "hidden";
+  document.getElementById("m-title").innerText = `سورة ${surahs[i]}`;
+
+  document.getElementById("prev-btn").disabled = i === 0;
+  document.getElementById("next-btn").disabled = i === 113;
+  document.getElementById("prev-btn").style.opacity = i === 0 ? "0.3" : "1";
+  document.getElementById("next-btn").style.opacity = i === 113 ? "0.3" : "1";
+
+  const cont = document.getElementById("m-content");
+  cont.innerHTML = `<div class="py-20 animate-pulse text-gold">جاري التحميل...</div>`;
+  cont.parentElement.scrollTop = 0;
+
+  try {
+    const res = await fetch(`https://api.alquran.cloud/v1/surah/${i + 1}`);
+    const d = await res.json();
+
+    let ayahs = d.data.ayahs
+      .map((a) => {
+        let cleanText = a.text;
+        if (
+          a.numberInSurah === 1 &&
+          cleanText.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")
+        ) {
+          cleanText = cleanText
+            .replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "")
+            .trim();
+        }
+        return cleanText !== ""
+          ? `${cleanText} <span class="ayah-num">${a.numberInSurah}</span>`
+          : `<span class="ayah-num">${a.numberInSurah}</span>`;
+      })
+      .join(" ");
+
+    let bismillahHeader =
+      i !== 8
+        ? '<div class="mb-12 font-bold opacity-80 text-3xl font-amiri">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>'
+        : "";
+    cont.innerHTML = `<div>${bismillahHeader}${ayahs}</div>`;
+  } catch (e) {
+    cont.innerHTML = "خطأ في الاتصال بالمصادر";
+  }
+}
+
+function navSurah(step) {
+  let newIndex = currentOpenSurahIndex + step;
+  if (newIndex >= 0 && newIndex <= 113) openRead(newIndex);
+}
+
+function markS(i) {
+  let k = JSON.parse(localStorage.getItem("khatma_ammar") || "[]");
+  k.includes(i) ? (k = k.filter((x) => x !== i)) : k.push(i);
+  localStorage.setItem("khatma_ammar", JSON.stringify(k));
+  drawK();
+}
+
+function drawK() {
+  const k = JSON.parse(localStorage.getItem("khatma_ammar") || "[]");
+  document.getElementById("khatma-btns").innerHTML = surahs
+    .map(
+      (s, i) => `
+                <button onclick="markS(${i})" class="surah-btn py-2 rounded-lg text-[9px] ${k.includes(i) ? "surah-btn-done" : ""}">${s}</button>
+            `,
+    )
+    .join("");
+
+  document.getElementById("khatma-names").innerHTML =
+    k
+      .sort((a, b) => a - b)
+      .map(
+        (i) => `
+                <span onclick="markS(${i})" class="bg-gold text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm cursor-pointer hover:bg-red-500 hover:scale-95 transition-all" title="حذف من السجل">${surahs[i]} ✕</span>
+            `,
+      )
+      .join("") ||
+    '<p class="text-slate-400 text-xs italic">اختر السور التي أتممت قراءتها..</p>';
+}
+
+// دالة تحديث أيقونة الثيم
+function updateThemeIcon() {
+  const isDark = document.documentElement.classList.contains("dark");
+  document.getElementById("theme-toggle").innerText = isDark ? "☀️" : "🌙";
 }
 
 window.onload = () => {
-  if (localStorage.getItem("ammar_theme") === "dark")
+  init();
+  drawK();
+
+  // استعادة الثيم المحفوظ
+  if (localStorage.getItem("mode") === "dark") {
     document.documentElement.classList.add("dark");
+  }
+  updateThemeIcon();
 
-  const cGrid = document.getElementById("counters-grid");
-  countersData.forEach((c) => {
-    cGrid.innerHTML += `<div class="bg-white dark:bg-darkCard p-6 rounded-3xl border border-slate-100 dark:border-slate-800 text-center shadow-sm relative">
-              <button onclick="resetCounter('${c.id}'); showToast('تم تصفير العداد');" class="absolute top-3 left-3 text-slate-300 hover:text-red-400">↺</button>
-              <div class="text-4xl font-black mb-1" id="${c.id}">${localStorage.getItem(c.id) || 0}</div>
-              <p class="text-gold text-[10px] font-bold uppercase mb-5">${c.title}</p>
-              <button onclick="increment('${c.id}', '${c.title}')" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-gold text-white dark:text-darkMain font-bold text-xs active:scale-95 transition-all">ذكر</button></div>`;
-  });
+  document.getElementById("counters-container").innerHTML = counters
+    .map(
+      (c) => `
+                <div class="bg-white dark:bg-darkCard p-4 rounded-3xl border dark:border-slate-800 text-center shadow-sm hover:border-gold/30 transition-all">
+                    <div class="text-2xl font-black text-gold mb-1" id="num-${c.id}">${localStorage.getItem(c.id) || 0}</div>
+                    <p class="text-[9px] font-bold text-slate-400 uppercase mb-3">${c.text}</p>
+                    <button onclick="addCount('${c.id}')" class="w-full py-2 bg-slate-900 dark:bg-gold text-white dark:text-darkMain rounded-xl text-xs font-bold active:scale-90 transition-all">ذكر</button>
+                </div>
+            `,
+    )
+    .join("");
 
-  const pList = document.getElementById("ammar-prayers-list");
-  ammarPrayers.forEach(
-    (p) =>
-      (pList.innerHTML += `<div class="p-6 bg-white/5 rounded-2xl prayer-card"><p class="text-sm text-white/90 italic font-medium leading-relaxed text-right">"${p}"</p></div>`),
-  );
-
-  const sGrid = document.getElementById("surahs-buttons-grid");
-  const read = JSON.parse(localStorage.getItem("ammar_read_surahs") || "[]");
-  surahNames.forEach(
-    (n, i) =>
-      (sGrid.innerHTML += `<button onclick="toggleSurah(${i})" id="surah-btn-${i}" class="py-2.5 rounded-xl border border-white/10 font-bold text-[10px] transition-all ${read.includes(i) ? "surah-btn-done" : "bg-white/5"}">${n}</button>`),
-  );
-
-  updateSelectedSurahsUI();
-  renderAudioLibrary();
+  document.getElementById("prayers-grid").innerHTML = prayers
+    .map(
+      (p) => `
+                <div class="p-6 bg-white dark:bg-darkCard rounded-3xl border-r-4 border-gold shadow-sm">
+                    <p class="font-amiri text-lg leading-relaxed">"${p}"</p>
+                </div>
+            `,
+    )
+    .join("");
 };
 
+function toggleDrop() {
+  document.getElementById("drop-menu").classList.toggle("hidden");
+}
+function searchR() {
+  const q = document.getElementById("q-search").value.toLowerCase();
+  renderR(reciters.filter((r) => r.name.includes(q)));
+}
+function closeRead() {
+  document.getElementById("read-modal").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+function resetKhatma() {
+  localStorage.setItem("khatma_ammar", "[]");
+  drawK();
+}
+
+// التعديل المطلوب على زر الثيم
 document.getElementById("theme-toggle").onclick = () => {
   document.documentElement.classList.toggle("dark");
-  localStorage.setItem(
-    "ammar_theme",
-    document.documentElement.classList.contains("dark") ? "dark" : "light",
-  );
+  const isDark = document.documentElement.classList.contains("dark");
+  localStorage.setItem("mode", isDark ? "dark" : "light");
+  updateThemeIcon(); // تحديث الأيقونة فوراً
 };

@@ -5,19 +5,82 @@
 body {
   font-family: "Tajawal", sans-serif;
   scroll-behavior: smooth;
+  transition:
+    background 0.5s,
+    color 0.5s;
 }
 
 .font-amiri {
   font-family: "Amiri", serif;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+.quran-content {
+  line-height: 3.2 !important;
+  word-spacing: 4px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 10px;
+.audio-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(197, 160, 89, 0.1);
+}
+
+.audio-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.quran-scroll-area {
+  max-height: 75vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+  scroll-behavior: smooth;
+}
+
+.mushaf-modal {
+  background: #fdf5e6
+    url("https://www.transparenttextures.com/patterns/old-paper.png");
+  border: 4px solid #2c2416;
+}
+
+.dark .mushaf-modal {
+  background: #121212 !important;
+  border-color: #333;
+  color: #e5e7eb;
+}
+
+.ayah-num {
+  color: #7d653a;
+  border: 1px solid rgba(125, 101, 58, 0.5);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65em;
+  margin: 0 10px;
+  font-weight: bold;
+  background: rgba(197, 160, 89, 0.05);
+}
+
+.dark .ayah-num {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.surah-btn {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.dark .surah-btn {
+  background-color: #1a1c20;
+  color: #94a3b8;
+  border-color: #2d2f36;
 }
 
 .surah-btn-done {
@@ -26,40 +89,44 @@ body {
   border-color: var(--gold) !important;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
 audio {
+  height: 35px;
   width: 100%;
-  height: 32px;
-  margin-top: 12px;
-  filter: grayscale(100%) opacity(0.7);
-  transition: 0.3s;
 }
 
-audio:hover {
-  filter: grayscale(0%) opacity(1);
+.dark audio {
+  filter: invert(1) hue-rotate(180deg) brightness(1.2);
 }
 
-@keyframes fadeInUp {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
-.animate-card {
-  animation: fadeInUp 0.4s ease backwards;
+.animate-modal {
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
-.prayer-card {
-  transition: all 0.3s ease;
-  border-right: 4px solid var(--gold);
+#theme-toggle {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.prayer-card:hover {
-  background-color: rgba(197, 160, 89, 0.1);
-  transform: scale(1.02);
+#theme-toggle:active {
+  transform: rotate(360deg) scale(0.8);
 }
