@@ -142,7 +142,6 @@ const prayers = [
   "اللهم اغفر لعمار وارحمه واعف عنه وأكرم نزله.",
   "اللهم اجعل قبره روضة من رياض الجنة.",
   "اللهم يمّن كتابه ويسّر حسابه وثقّل بالحسنات ميزانه.",
-  "اللهم انقله من ضيق اللحود إلى جنات الخلود.",
   "اللهم ارحم من كسر قلوبنا رحيله واجمعنا به في الفردوس الأعلى.",
   "اللهم اجعل عمله هذا أنيساً له في وحشته.",
   "اللهم ارزقه لذة النظر إلى وجهك الكريم.",
@@ -151,13 +150,6 @@ const prayers = [
   "اللهم ارفع درجاته في المهديين.",
   "اللهم انظر إليه نظرة رضا.",
   "اللهم قهِ فتنة القبر وعذاب النار.",
-  "اللهم ارحمه فوق الأرض وتحت الأرض.",
-  "اللهم أبدله داراً خيراً من داره.",
-  "اللهم أعذه من عذاب القبر.",
-  "اللهم ثبته عند السؤال.",
-  "اللهم اكتبه عندك من الصالحين.",
-  "اللهم أنزله منزلاً مباركاً.",
-  "اللهم عامله بما أنت أهله.",
   "اللهم ارزق عمار الجنة بغير حساب.",
 ];
 
@@ -182,12 +174,28 @@ async function init() {
   } catch (e) {}
 }
 
+function copyPhone() {
+  const phone = document.getElementById("phone-number").innerText;
+  navigator.clipboard.writeText(phone).then(() => {
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      icon: "success",
+      title: "تم نسخ الرقم",
+      background: "#16181d",
+      color: "#c5a059",
+    });
+  });
+}
+
 function renderR(list) {
   document.getElementById("r-list").innerHTML = list
     .map(
       (r) => `
-                <div onclick='setReciter(${JSON.stringify(r).replace(/'/g, "&apos;")})' class="p-4 hover:bg-gold/10 cursor-pointer border-b dark:border-white/5 text-sm">${r.name}</div>
-            `,
+        <div onclick='setReciter(${JSON.stringify(r).replace(/'/g, "&apos;")})' class="p-4 hover:bg-gold/10 cursor-pointer border-b dark:border-white/5 text-sm">${r.name}</div>
+      `,
     )
     .join("");
 }
@@ -198,13 +206,13 @@ function setReciter(r) {
     .map((s) => {
       const i = parseInt(s) - 1;
       return `
-                <div class="audio-card bg-white dark:bg-darkCard p-5 rounded-3xl shadow-sm border dark:border-slate-800">
-                    <div class="flex justify-between items-center mb-4">
-                        <h4 class="font-bold text-sm">${surahs[i]}</h4>
-                        <button onclick="openRead(${i})" class="text-[10px] text-gold border border-gold/20 px-3 py-1 rounded-full hover:bg-gold hover:text-white transition-all">قراءة 📖</button>
-                    </div>
-                    <audio controls preload="none"><source src="${r.srv}${String(s).padStart(3, "0")}.mp3"></audio>
-                </div>`;
+          <div class="audio-card bg-white dark:bg-darkCard p-5 rounded-3xl shadow-sm border dark:border-slate-800">
+              <div class="flex justify-between items-center mb-4">
+                  <h4 class="font-bold text-sm">${surahs[i]}</h4>
+                  <button onclick="openRead(${i})" class="text-[10px] text-gold border border-gold/20 px-3 py-1 rounded-full hover:bg-gold hover:text-white transition-all">قراءة 📖</button>
+              </div>
+              <audio controls preload="none"><source src="${r.srv}${String(s).padStart(3, "0")}.mp3"></audio>
+          </div>`;
     })
     .join("");
   document.getElementById("drop-menu").classList.add("hidden");
@@ -215,53 +223,40 @@ function addCount(id) {
   localStorage.setItem(id, n);
   document.getElementById("num-" + id).innerText = n;
   if (n % 33 === 0) {
-    const Toast = Swal.mixin({
+    Swal.fire({
       toast: true,
       position: "top-end",
       showConfirmButton: false,
       timer: 2500,
-      timerProgressBar: true,
+      icon: "success",
+      title: rewards[Math.floor(Math.random() * rewards.length)],
       background: document.documentElement.classList.contains("dark")
         ? "#16181d"
         : "#fdf5e6",
       color: "#c5a059",
-    });
-    Toast.fire({
-      icon: "success",
-      title: rewards[Math.floor(Math.random() * rewards.length)],
     });
   }
 }
 
 async function openRead(i) {
   currentOpenSurahIndex = i;
-  const m = document.getElementById("read-modal");
-  m.style.display = "flex";
+  document.getElementById("read-modal").style.display = "flex";
   document.body.style.overflow = "hidden";
   document.getElementById("m-title").innerText = `سورة ${surahs[i]}`;
-
-  document.getElementById("prev-btn").disabled = i === 0;
-  document.getElementById("next-btn").disabled = i === 113;
-  document.getElementById("prev-btn").style.opacity = i === 0 ? "0.3" : "1";
-  document.getElementById("next-btn").style.opacity = i === 113 ? "0.3" : "1";
-
   const cont = document.getElementById("m-content");
   cont.innerHTML = `<div class="py-20 animate-pulse text-gold">جاري التحميل...</div>`;
-  cont.parentElement.scrollTop = 0;
-
   try {
     const res = await fetch(`https://api.alquran.cloud/v1/surah/${i + 1}`);
     const d = await res.json();
-
     let ayahs = d.data.ayahs
       .map((a) => {
         let cleanText = a.text;
         if (
           a.numberInSurah === 1 &&
-          cleanText.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")
+          cleanText.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")
         ) {
           cleanText = cleanText
-            .replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "")
+            .replace("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "")
             .trim();
         }
         return cleanText !== ""
@@ -269,14 +264,9 @@ async function openRead(i) {
           : `<span class="ayah-num">${a.numberInSurah}</span>`;
       })
       .join(" ");
-
-    let bismillahHeader =
-      i !== 8
-        ? '<div class="mb-12 font-bold opacity-80 text-3xl font-amiri">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>'
-        : "";
-    cont.innerHTML = `<div>${bismillahHeader}${ayahs}</div>`;
+    cont.innerHTML = `<div>${i !== 8 ? '<div class="mb-12 font-bold opacity-80 text-3xl font-amiri">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>' : ""}${ayahs}</div>`;
   } catch (e) {
-    cont.innerHTML = "خطأ في الاتصال بالمصادر";
+    cont.innerHTML = "خطأ في الاتصال";
   }
 }
 
@@ -297,58 +287,47 @@ function drawK() {
   document.getElementById("khatma-btns").innerHTML = surahs
     .map(
       (s, i) => `
-                <button onclick="markS(${i})" class="surah-btn py-2 rounded-lg text-[9px] ${k.includes(i) ? "surah-btn-done" : ""}">${s}</button>
-            `,
+        <button onclick="markS(${i})" class="surah-btn py-2 rounded-lg text-[9px] ${k.includes(i) ? "surah-btn-done" : ""}">${s}</button>
+      `,
     )
     .join("");
-
   document.getElementById("khatma-names").innerHTML =
     k
       .sort((a, b) => a - b)
       .map(
         (i) => `
-                <span onclick="markS(${i})" class="bg-gold text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm cursor-pointer hover:bg-red-500 hover:scale-95 transition-all" title="حذف من السجل">${surahs[i]} ✕</span>
-            `,
+        <span onclick="markS(${i})" class="bg-gold text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm cursor-pointer">${surahs[i]} ✕</span>
+      `,
       )
       .join("") ||
     '<p class="text-slate-400 text-xs italic">اختر السور التي أتممت قراءتها..</p>';
 }
 
-// دالة تحديث أيقونة الثيم
-function updateThemeIcon() {
-  const isDark = document.documentElement.classList.contains("dark");
-  document.getElementById("theme-toggle").innerText = isDark ? "☀️" : "🌙";
-}
-
 window.onload = () => {
   init();
   drawK();
-
-  // استعادة الثيم المحفوظ
-  if (localStorage.getItem("mode") === "dark") {
+  if (localStorage.getItem("mode") === "dark")
     document.documentElement.classList.add("dark");
-  }
-  updateThemeIcon();
+  document.getElementById("theme-toggle").innerText =
+    document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
 
   document.getElementById("counters-container").innerHTML = counters
     .map(
       (c) => `
-                <div class="bg-white dark:bg-darkCard p-4 rounded-3xl border dark:border-slate-800 text-center shadow-sm hover:border-gold/30 transition-all">
-                    <div class="text-2xl font-black text-gold mb-1" id="num-${c.id}">${localStorage.getItem(c.id) || 0}</div>
-                    <p class="text-[9px] font-bold text-slate-400 uppercase mb-3">${c.text}</p>
-                    <button onclick="addCount('${c.id}')" class="w-full py-2 bg-slate-900 dark:bg-gold text-white dark:text-darkMain rounded-xl text-xs font-bold active:scale-90 transition-all">ذكر</button>
-                </div>
-            `,
+        <div class="bg-white dark:bg-darkCard p-4 rounded-3xl border dark:border-slate-800 text-center shadow-sm">
+          <div class="text-2xl font-black text-gold mb-1" id="num-${c.id}">${localStorage.getItem(c.id) || 0}</div>
+          <p class="text-[9px] font-bold text-slate-400 uppercase mb-3">${c.text}</p>
+          <button onclick="addCount('${c.id}')" class="w-full py-2 bg-slate-900 dark:bg-gold text-white dark:text-darkMain rounded-xl text-xs font-bold active:scale-90 transition-all">ذكر</button>
+        </div>
+      `,
     )
     .join("");
 
   document.getElementById("prayers-grid").innerHTML = prayers
     .map(
       (p) => `
-                <div class="p-6 bg-white dark:bg-darkCard rounded-3xl border-r-4 border-gold shadow-sm">
-                    <p class="font-amiri text-lg leading-relaxed">"${p}"</p>
-                </div>
-            `,
+        <div class="p-6 bg-white dark:bg-darkCard rounded-3xl border-r-4 border-gold shadow-sm"><p class="font-amiri text-lg leading-relaxed">"${p}"</p></div>
+      `,
     )
     .join("");
 };
@@ -369,10 +348,12 @@ function resetKhatma() {
   drawK();
 }
 
-// التعديل المطلوب على زر الثيم
 document.getElementById("theme-toggle").onclick = () => {
   document.documentElement.classList.toggle("dark");
-  const isDark = document.documentElement.classList.contains("dark");
-  localStorage.setItem("mode", isDark ? "dark" : "light");
-  updateThemeIcon(); // تحديث الأيقونة فوراً
+  localStorage.setItem(
+    "mode",
+    document.documentElement.classList.contains("dark") ? "dark" : "light",
+  );
+  document.getElementById("theme-toggle").innerText =
+    document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
 };

@@ -9,8 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700;900&display=swap"
     rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0b0d'/><path d='M30 50 C 30 30, 70 30, 70 50 C 70 70, 30 70, 30 50 M 50 35 L 50 65' stroke='%23c5a059' stroke-width='8' fill='none' stroke-linecap='round'/><text x='50%' y='65%' text-anchor='middle' fill='%23c5a059' font-family='Amiri' font-size='55' font-weight='bold'>ع</text></svg>">
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%2316181d'/><text x='50%25' y='68%25' text-anchor='middle' fill='%23c5a059' font-family='serif' font-size='60' font-weight='bold'>ع</text></svg>">
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -27,9 +29,7 @@
     <div class="container mx-auto flex justify-between items-center px-4">
       <div class="font-amiri text-2xl font-bold text-gold">أثرٌ باقٍ</div>
       <button id="theme-toggle"
-        class="w-10 h-10 rounded-full bg-slate-100 dark:bg-darkCard flex items-center justify-center border dark:border-slate-700 shadow-sm transition-all hover:scale-110 text-xl">
-        🌙
-      </button>
+        class="w-10 h-10 rounded-full bg-slate-100 dark:bg-darkCard flex items-center justify-center border dark:border-slate-700 shadow-sm transition-all hover:scale-110 text-xl">🌙</button>
     </div>
   </nav>
 
@@ -43,16 +43,86 @@
   </header>
 
   <main class="container mx-auto px-4 md:px-8 max-w-6xl">
-
     <section class="mb-16">
+      <div
+        class="bg-gradient-to-br from-gold/15 to-transparent dark:from-gold/5 rounded-[2.5rem] p-8 md:p-12 border border-gold/30 text-center relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-gold/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-gold/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10">
+          <div class="inline-block p-3 bg-gold/10 rounded-full mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+
+          <h2 class="font-amiri text-3xl md:text-4xl text-gold font-bold mb-4">صدقة جارية (منبر مسجد)</h2>
+          <p class="text-slate-700 dark:text-slate-200 mb-6 max-w-2xl mx-auto leading-relaxed text-lg">
+            ساهم معنا في نيل أجر الكلمة الطيبة وإعمار بيوت الله، من خلال التبرع لـ
+            <span class="text-gold font-bold underline decoration-double underline-offset-4">إعادة إنشاء منبر مسجد
+              المطحن</span>
+            كصدقة جارية عن روح <span class="font-bold">عمار</span>.
+          </p>
+
+          <div class="flex flex-col items-center gap-4">
+            <div
+              class="bg-white dark:bg-darkCard px-6 py-4 rounded-3xl shadow-xl border-2 border-gold/20 flex flex-col md:flex-row items-center gap-6">
+              <div class="text-right">
+                <p class="text-[10px] text-slate-400 uppercase font-bold mb-1 tracking-widest">رقم فودافون كاش</p>
+                <span id="phone-number"
+                  class="text-3xl font-black text-slate-800 dark:text-white tracking-wider">01014167098</span>
+              </div>
+              <button onclick="copyPhone()"
+                class="bg-gold hover:bg-gold/90 text-darkMain px-10 py-4 rounded-2xl font-black transition-all flex items-center gap-3 shadow-lg shadow-gold/20 active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                نسخ الرقم للتبرع
+              </button>
+            </div>
+            <p class="text-xs text-gold/80 font-medium italic mt-2">"إذا مات ابن آدم انقطع عمله إلا من ثلاث: منها صدقة
+              جارية"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
       <div class="mb-8 border-r-4 border-gold pr-4">
         <h2 class="font-amiri text-3xl text-gold font-bold">المسبحة الإلكترونية</h2>
-        <p class="text-xs text-slate-400">15 ذكراً متنوعاً - تنبيهات تلقائية عند 33</p>
+        <p class="text-xs text-slate-400">اذكر الله، ولك الأجر بإذن الله</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="counters-container"></div>
     </section>
 
     <section class="mb-16">
+      <div class="mb-8 border-r-4 border-gold pr-4">
+        <h2 class="font-amiri text-3xl text-gold font-bold">أدعية مهداة لعمار</h2>
+        <p class="text-xs text-slate-400">اللهم استجب دعاءنا واغفر لموتانا</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="prayers-grid"></div>
+    </section>
+
+    <section class="mb-16">
+      <div class="bg-white dark:bg-darkCard rounded-[2.5rem] p-6 md:p-10 border dark:border-gold/10 shadow-xl">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="text-gold font-bold font-amiri text-2xl italic">سجل الختمة</h3>
+          <button onclick="resetKhatma()"
+            class="text-[10px] text-red-500 font-bold border border-red-500/20 px-3 py-1 rounded-lg hover:bg-red-50 transition-all">تصفير
+            ↺</button>
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-10 gap-2" id="khatma-btns"></div>
+        <div id="khatma-names"
+          class="flex flex-wrap gap-2 mt-8 min-h-[50px] p-4 bg-slate-50 dark:bg-black/40 rounded-2xl border border-dashed border-gold/20">
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-32">
       <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 border-r-4 border-gold pr-4">
         <h2 class="font-amiri text-3xl text-gold font-bold">استماع للقرآن الكريم</h2>
         <div class="relative w-full md:w-72">
@@ -72,33 +142,11 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="audio-grid"></div>
     </section>
 
-    <section class="mb-16">
-      <div class="bg-white dark:bg-darkCard rounded-[2.5rem] p-6 md:p-10 border dark:border-gold/10 shadow-xl">
-        <div class="flex justify-between items-center mb-8">
-          <h3 class="text-gold font-bold font-amiri text-2xl italic">سجل الختمة</h3>
-          <button onclick="resetKhatma()"
-            class="text-[10px] text-red-500 font-bold border border-red-500/20 px-3 py-1 rounded-lg hover:bg-red-50 transition-all">تصفير
-            ↺</button>
-        </div>
-        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-10 gap-2" id="khatma-btns"></div>
-        <div id="khatma-names"
-          class="flex flex-wrap gap-2 mt-8 min-h-[50px] p-4 bg-slate-50 dark:bg-black/40 rounded-2xl border border-dashed border-gold/20">
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-32">
-      <div class="mb-10 text-center border-b border-gold/10 pb-6">
-        <h2 class="font-amiri text-4xl text-gold font-bold mb-4">أدعية مهداة لعمار</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="prayers-grid"></div>
-    </section>
-
   </main>
 
   <footer class="bg-white dark:bg-darkCard border-t dark:border-white/5 py-12 text-center text-slate-400">
     <div class="container mx-auto px-4">
-      <p class="font-amiri text-2xl text-gold mb-4 italic">﴿ إِنَّ هَذَا كَانَ لَكُمْ جَزَاءً وَكَانَ سَعْيُكُمْ
+      <p class="font-amiri text-2xl text-gold mb-4 italic">﴿ إِنَّ هَذَا كَانَ لَكُمْ جَزَاءً وَكَانَ سَعْيُكُمْ
         مَشْكُورًا ﴾</p>
       <p class="text-[10px] tracking-widest uppercase font-bold">صدقة جارية عن روح عمار &bull; 2026</p>
     </div>

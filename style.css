@@ -5,8 +5,8 @@
 body {
   font-family: "Tajawal", sans-serif;
   scroll-behavior: smooth;
-  transition:
-    background 0.5s,
+  transition
+    background: 0.5s,
     color 0.5s;
 }
 
@@ -34,7 +34,6 @@ body {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--gold) transparent;
-  scroll-behavior: smooth;
 }
 
 .mushaf-modal {
@@ -121,12 +120,4 @@ audio {
 
 .animate-modal {
   animation: fadeIn 0.3s ease-out forwards;
-}
-
-#theme-toggle {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-#theme-toggle:active {
-  transform: rotate(360deg) scale(0.8);
 }
